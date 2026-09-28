@@ -1,0 +1,40 @@
+/* Shared action states; no sizing or scroll-animation rules. */
+:root {
+  --action-duration: 220ms;
+  --action-motion: cubic-bezier(.2,.8,.2,1);
+}
+.button {
+  --action-background: var(--yellow);
+  --action-color: #111;
+  transition: background-color var(--action-duration) ease, color var(--action-duration) ease, border-color var(--action-duration) ease, transform var(--action-duration) var(--action-motion);
+}
+.button--yellow { --action-background: var(--black); --action-color: #fff; }
+.button .icon, .text-link .icon, .text-link>span, .developer-credit span, .contact-details>a>.icon:last-child {
+  transition: transform var(--action-duration) var(--action-motion);
+}
+.text-link>span { display: inline-block; }
+:is(.text-link, .footer-bottom>a) {
+  background-image: linear-gradient(var(--yellow),var(--yellow));
+  background-repeat: no-repeat;
+  background-position: left calc(100% - 5px);
+  background-size: 0 1px;
+  transition: color var(--action-duration) ease, background-size var(--action-duration) var(--action-motion);
+}
+:is(.button, .text-link, .footer-bottom>a, .contact-details>a, .carousel-controls button):focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 2px var(--black);
+}
+.button:focus-visible {
+  background-color: var(--action-background); color: var(--action-color); border-color: var(--yellow);
+}
+.button:focus-visible .icon, .text-link:focus-visible .icon, .text-link:focus-visible>span, .developer-credit:focus-visible span, .contact-details>a:focus-visible>.icon:last-child { transform: translateX(3px); }
+:is(.text-link, .footer-bottom>a):focus-visible { color: var(--yellow); background-size: 100% 1px; }
+@media (hover: hover) and (pointer: fine) {
+  .button:hover { background-color: var(--action-background); color: var(--action-color); border-color: var(--yellow); }
+  .button:hover .icon, .text-link:hover .icon, .text-link:hover>span, .developer-credit:hover span, .contact-details>a:hover>.icon:last-child { transform: translateX(3px); }
+  :is(.text-link, .footer-bottom>a):hover { color: var(--yellow); background-size: 100% 1px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .button .icon, .text-link .icon, .text-link>span, .developer-credit span, .contact-details>a>.icon:last-child { transform: none !important; }
+}

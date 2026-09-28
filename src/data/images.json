@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "width": 912,
+    "height": 1600,
+    "source": "imagens /imagen 1.jpeg",
+    "file": "academia-01.webp"
+  },
+  {
+    "id": 2,
+    "width": 909,
+    "height": 1600,
+    "source": "imagens /imagen 2.jpeg",
+    "file": "academia-02.webp"
+  },
+  {
+    "id": 3,
+    "width": 900,
+    "height": 1600,
+    "source": "imagens /imagen 3.jpeg",
+    "file": "academia-03.webp"
+  },
+  {
+    "id": 4,
+    "width": 914,
+    "height": 1600,
+    "source": "imagens /imagen 4.jpeg",
+    "file": "academia-04.webp"
+  },
+  {
+    "id": 5,
+    "width": 911,
+    "height": 1600,
+    "source": "imagens /imagen 5.jpeg",
+    "file": "academia-05.webp"
+  },
+  {
+    "id": 6,
+    "width": 900,
+    "height": 1600,
+    "source": "imagens /imagen 6.jpeg",
+    "file": "academia-06.webp"
+  }
+]
