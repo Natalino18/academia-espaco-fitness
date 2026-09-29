@@ -12,7 +12,7 @@ export function About() {
           const section = document.getElementById('modalidades');
           if (!section) return;
           event.preventDefault();
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          section.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
         }}>Ver modalidades</Button>
       </div>
     </div>

@@ -278,6 +278,11 @@
   .about::before { mask-image: linear-gradient(180deg,transparent 32px,#000b 20%,#000c 35%,#0002 58%,#0002 90%,#0006 100%); }
 }
 
+/* Keep footer link targets at least 24px tall; retain larger mobile targets. */
+@media (min-width: 701px) {
+  .footer-main>div:not(.footer-brand) a { min-height: 24px; }
+}
+
 /* High-resolution photograph belongs exclusively to the final CTA. */
 .final-photo picture { display: block; width: 100%; height: 100%; }
 .final-photo img { object-fit: cover; object-position: 50% 60%; }

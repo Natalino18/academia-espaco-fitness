@@ -4,9 +4,10 @@ import securityHeaders from './config/security-headers.json';
 
 export default defineConfig(({ mode }) => {
   const { VITE_SITE_URL = '' } = loadEnv(mode, process.cwd(), 'VITE_');
+  const publicUrl = VITE_SITE_URL || (mode === 'production' ? 'https://academia-espaco-fitness.pages.dev/' : '');
   let siteUrl = '';
-  if (VITE_SITE_URL) {
-    const url = new URL(VITE_SITE_URL);
+  if (publicUrl) {
+    const url = new URL(publicUrl);
     if (!['https:', 'http:'].includes(url.protocol)) throw new Error('VITE_SITE_URL deve ser uma URL HTTP(S).');
     if (url.username || url.password || url.search || url.hash) throw new Error('VITE_SITE_URL deve conter somente a URL pública, sem credenciais, query ou fragmento.');
     if (mode === 'production' && url.protocol !== 'https:') throw new Error('VITE_SITE_URL de produção deve utilizar HTTPS.');

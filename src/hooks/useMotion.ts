@@ -32,20 +32,23 @@ export function useMotion() {
       let heroTop = 0;
       let heroTravel = 1;
       let previousProgress = -1;
+      let sceneSize: { width: number; height: number } | undefined;
       let geometry = { x: 0, y: 0, sx: 1, sy: 1 };
       const measure = () => {
         if (story && sticky && grid && photoFrame) {
           heroTop = story.getBoundingClientRect().top + window.scrollY;
           heroTravel = Math.max(1, story.offsetHeight - sticky.offsetHeight);
+          const width = sticky.clientWidth;
+          const height = sticky.clientHeight;
           // Untransformed grid metrics: measured only when layout changes.
           geometry = {
             x: grid.offsetLeft + photoFrame.offsetLeft,
             y: grid.offsetTop + photoFrame.offsetTop,
-            sx: sticky.clientWidth / Math.max(1, photoFrame.offsetWidth),
-            sy: sticky.clientHeight / Math.max(1, photoFrame.offsetHeight),
+            sx: width / Math.max(1, photoFrame.offsetWidth),
+            sy: height / Math.max(1, photoFrame.offsetHeight),
           };
-          photoFrame.style.setProperty('--scene-width', `${sticky.clientWidth}px`);
-          photoFrame.style.setProperty('--scene-height', `${sticky.clientHeight}px`);
+          // Defer writes until update has also read the parallax geometry.
+          sceneSize = { width, height };
           previousProgress = -1;
         }
         schedule();
@@ -56,6 +59,11 @@ export function useMotion() {
         const viewportHeight = window.innerHeight;
         // Batch all layout reads before writing any animated style.
         const positions = parallax.map(el => ({ el, rect: el.getBoundingClientRect() }));
+        if (sceneSize) {
+          photoFrame?.style.setProperty('--scene-width', `${sceneSize.width}px`);
+          photoFrame?.style.setProperty('--scene-height', `${sceneSize.height}px`);
+          sceneSize = undefined;
+        }
         const p = Math.min(1, Math.max(0, (scrollY - heroTop) / heroTravel));
         if (p !== previousProgress) {
           previousProgress = p;
