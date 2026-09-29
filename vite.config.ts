@@ -14,8 +14,6 @@ export default defineConfig(({ mode }) => {
   }
   return {
     build: { sourcemap: false },
-    // Preview exercises production headers without restricting Vite HMR.
-    preview: { headers: securityHeaders },
     plugins: [react(), {
       name: 'site-metadata',
       transformIndexHtml: (html) => html.replace('<!-- site-metadata -->', siteUrl
@@ -23,10 +21,21 @@ export default defineConfig(({ mode }) => {
         : ''),
     }, {
       name: 'production-security-headers',
-      apply: 'build',
+      configurePreviewServer(server) {
+        // Mirror the path-specific production policy without changing Vite HMR.
+        server.middlewares.use((req, res, next) => {
+          const isSitemap = req.url?.split('?')[0] === '/sitemap.xml';
+          for (const [name, value] of Object.entries(securityHeaders)) {
+            if (isSitemap && name === 'Content-Security-Policy') continue;
+            res.setHeader(name, value);
+          }
+          next();
+        });
+      },
       generateBundle() {
         // Recognized by Netlify / Cloudflare Pages; other hosts need equivalent rules.
-        this.emitFile({ type: 'asset', fileName: '_headers', source: `/*\n${Object.entries(securityHeaders).map(([name, value]) => `  ${name}: ${value}`).join('\n')}\n` });
+        // Cloudflare: remove the inherited CSP only for the browser's XML viewer.
+        this.emitFile({ type: 'asset', fileName: '_headers', source: `/*\n${Object.entries(securityHeaders).map(([name, value]) => `  ${name}: ${value}`).join('\n')}\n\n/sitemap.xml\n  ! Content-Security-Policy\n` });
       },
     }],
   };
