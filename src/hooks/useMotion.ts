@@ -2,6 +2,23 @@ import { useLayoutEffect } from 'react';
 
 export function useMotion() {
   useLayoutEffect(() => {
+    // Decorative photographs must not contend with the hero's first paint.
+    // Keep their approved appearance; only start these downloads after the
+    // critical image is decoded and the browser has had a paint opportunity.
+    let cancelled = false;
+    let paintFrame = 0;
+    let backgroundFrame = 0;
+    const showBackgrounds = () => {
+      if (cancelled) return;
+      paintFrame = requestAnimationFrame(() => {
+        backgroundFrame = requestAnimationFrame(() => {
+          if (!cancelled) document.documentElement.classList.add('hero-painted');
+        });
+      });
+    };
+    const heroImage = document.querySelector<HTMLImageElement>('.hero-photo');
+    if (heroImage) void heroImage.decode().then(showBackgrounds, showBackgrounds);
+    else showBackgrounds();
     const media = matchMedia('(prefers-reduced-motion: reduce)');
     let cleanup = () => {};
     const setup = () => {
@@ -26,15 +43,20 @@ export function useMotion() {
       const grid = document.querySelector<HTMLElement>('.story-grid');
       const photoFrame = document.querySelector<HTMLElement>('.hero-frame');
       const storyPanel = document.querySelector<HTMLElement>('.story-copy');
+      const intro = document.querySelector<HTMLElement>('.hero-content');
       const heroControls = [...document.querySelectorAll<HTMLElement>('.hero-content, .hero-bottom')];
       const parallax = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];
       let frame = 0;
       let heroTop = 0;
+      let introFitsViewport = true;
       let heroTravel = 1;
       let previousProgress = -1;
       let sceneSize: { width: number; height: number } | undefined;
       let geometry = { x: 0, y: 0, sx: 1, sy: 1 };
       const measure = () => {
+        // Short screens must allow the original intro to scroll into view before
+        // any storytelling can hide its actions. Keep the existing layout intact.
+        introFitsViewport = !intro || intro.offsetTop + intro.offsetHeight + 24 <= window.innerHeight;
         if (story && sticky && grid && photoFrame) {
           heroTop = story.getBoundingClientRect().top + window.scrollY;
           heroTravel = Math.max(1, story.offsetHeight - sticky.offsetHeight);
@@ -64,7 +86,10 @@ export function useMotion() {
           photoFrame?.style.setProperty('--scene-height', `${sceneSize.height}px`);
           sceneSize = undefined;
         }
-        const p = Math.min(1, Math.max(0, (scrollY - heroTop) / heroTravel));
+        const progress = Math.min(1, Math.max(0, (scrollY - heroTop) / heroTravel));
+        // Never make a focused action invisible or inert during native Tab scrolling.
+        const hasIntroFocus = heroControls.some(el => el.contains(document.activeElement));
+        const p = introFitsViewport && !hasIntroFocus ? progress : 0;
         if (p !== previousProgress) {
           previousProgress = p;
           const ease = (start: number, end: number) => {
@@ -108,14 +133,19 @@ export function useMotion() {
       cancelAnimationFrame(frame);
       update();
       const resizeObserver = new ResizeObserver(measure);
+      if (intro) resizeObserver.observe(intro);
       if (grid) resizeObserver.observe(grid);
       if (storyPanel) resizeObserver.observe(storyPanel);
+      document.addEventListener('focusin', schedule);
+      document.addEventListener('focusout', schedule);
       window.addEventListener('scroll', schedule, { passive: true });
       window.addEventListener('resize', measure, { passive: true });
       cleanup = () => {
         observer.disconnect();
         resizeObserver.disconnect();
         photoFrame?.removeAttribute('style');
+        document.removeEventListener('focusin', schedule);
+        document.removeEventListener('focusout', schedule);
         window.removeEventListener('scroll', schedule);
         window.removeEventListener('resize', measure);
         cancelAnimationFrame(frame);
@@ -127,6 +157,13 @@ export function useMotion() {
     };
     setup();
     media.addEventListener('change', setup);
-    return () => { cleanup(); media.removeEventListener('change', setup); document.documentElement.classList.remove('motion-ready'); };
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(paintFrame);
+      cancelAnimationFrame(backgroundFrame);
+      cleanup();
+      media.removeEventListener('change', setup);
+      document.documentElement.classList.remove('motion-ready', 'hero-painted');
+    };
   }, []);
 }

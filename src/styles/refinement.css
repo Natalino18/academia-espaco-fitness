@@ -287,3 +287,9 @@
 .final-photo picture { display: block; width: 100%; height: 100%; }
 .final-photo img { object-fit: cover; object-position: 50% 60%; }
 @media (max-width: 700px) { .final-photo img { object-position: 18% 50%; } }
+
+/* These decorative surfaces are hidden or below the fold at the first paint.
+   Defer only their network requests; their layout and final artwork are unchanged. */
+html:not(.hero-painted) :is(.story-surface, .about, .gallery-manifesto)::before {
+  background-image: none;
+}

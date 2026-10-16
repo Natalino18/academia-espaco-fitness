@@ -33,7 +33,7 @@ export function Hero() {
         <div><span>Para o seu treino</span><strong>Musculação e aulas</strong></div>
         <div><span>{schedule[0].day}</span><strong>{schedule[0].open} às {schedule[0].close}</strong></div>
         <div><span>Encontre a academia</span><strong>{store.neighborhood} · Paulo Afonso</strong></div>
-        <a className="scroll-cue" href="#espaco" aria-label="Conheça a academia"><Icon name="down" /><span>Explore</span></a>
+        <a className="scroll-cue" href="#espaco" aria-label="Explore — conheça a academia"><Icon name="down" /><span>Explore</span></a>
       </div>
 
       <span className="story-index" aria-hidden="true">ESPAÇO / 01</span>
