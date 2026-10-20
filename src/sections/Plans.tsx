@@ -1,7 +1,9 @@
-import { plans, otherPlans, installment } from '../data/plans';
+import { Icon } from '../components/Icon';
+import '../styles/plans-temporary.css';
+import { plans, otherPlans, installment, temporaryPricingEnabled, temporaryPlans, temporaryMonthlyPlan, temporaryPlanBenefits } from '../data/plans';
 import { Button } from '../components/Button';
 import { whatsappUrl } from '../utils/links';
-export function Plans() {
+function OriginalPlans() {
   return <section id="planos" className="plans section" tabIndex={-1} aria-labelledby="plans-title">
     <picture className="plans-background" aria-hidden="true">
       <source media="(max-width: 700px)" srcSet="/images/planos/academia-3836.webp" />
@@ -12,6 +14,36 @@ export function Plans() {
       <p className="plans-benefits-note" data-reveal>Também aceitamos TotalPass e Wellhub (Gympass). Consulte a elegibilidade do seu plano. <a className="text-link" href="#beneficios">Saiba mais <span aria-hidden="true">↗</span></a></p>
       <p className="installment" data-reveal><span aria-hidden="true">↗</span> {installment}</p>
       <div className="other-plans" data-reveal><div><h3>OUTRAS OPÇÕES SOB CONSULTA</h3><p>{otherPlans.join(' · ')}</p></div><a className="text-link" href={whatsappUrl('diária, semanal, quinzenal, pacote ou aula avulsa')} target="_blank" rel="noopener noreferrer">Consultar pelo WhatsApp <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>;
+}
+
+// Layout temporário isolado; desativar temporaryPricingEnabled restaura a seção original.
+export function Plans() {
+  if (!temporaryPricingEnabled) return <OriginalPlans />;
+  return <section id="planos" className="plans plans--temporary section" tabIndex={-1} aria-labelledby="plans-title">
+    <div className="wrap">
+      <div className="plans-heading" data-reveal>
+        <div><p className="eyebrow">PLANOS</p><h2 id="plans-title">ESCOLHA O PLANO<br /><em>IDEAL PARA VOCÊ.</em></h2></div>
+        <p>Seu próximo passo começa aqui.<br />Invista no seu treino.</p>
+      </div>
+      <div className="plans-grid">{temporaryPlans.map(plan => <article className="plan-card" key={plan.name} data-reveal>
+        <div className="temporary-plan-top"><span className="temporary-plan-badge">PLANO</span><Icon name="plus" /></div>
+        <h3>{plan.name}</h3>
+        <p className="plan-price"><span>R$</span> {plan.price}<small>,00</small></p>
+        <p className="temporary-installments">{plan.installments}</p>
+        <Button href={whatsappUrl(`o plano ${plan.name.toLowerCase()}`)}>Consultar plano</Button>
+      </article>)}</div>
+      <article className="temporary-monthly" data-reveal aria-labelledby="monthly-title">
+        <div><p className="temporary-monthly-label">SEU TREINO, MÊS A MÊS</p><h3 id="monthly-title">PLANO {temporaryMonthlyPlan.name.toUpperCase()}</h3></div>
+        <p className="plan-price"><span>R$</span> {temporaryMonthlyPlan.price}<small>,00</small></p>
+        <Button href={whatsappUrl('o plano mensal')} variant="dark">Consultar plano mensal</Button>
+      </article>
+      <ul className="temporary-plan-benefits" aria-label="Benefícios dos planos" data-reveal>
+        {temporaryPlanBenefits.map((benefit, i) => <li key={benefit}><Icon name={i === 3 ? 'arrow' : 'plus'} /><span>{benefit}</span></li>)}
+      </ul>
+      <p className="plans-benefits-note" data-reveal>Também aceitamos TotalPass e Wellhub (Gympass). Consulte a elegibilidade do seu plano. <a className="text-link" href="#beneficios">Saiba mais <span aria-hidden="true">↗</span></a></p>
+      <p className="temporary-plan-closing" data-reveal>INVISTA EM VOCÊ.<br /><em>TRANSFORME SEUS RESULTADOS!</em></p>
     </div>
   </section>;
 }

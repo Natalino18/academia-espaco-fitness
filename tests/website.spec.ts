@@ -27,13 +27,12 @@ for (const width of widths) {
 test('Dados comerciais e destinos oficiais', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.plan-card')).toHaveCount(3);
-  for (const [name, price, duration, monthly] of [['TRIMESTRAL', '285', '3', '95'], ['SEMESTRAL', '540', '6', '90'], ['ANUAL', '960', '12', '80']]) {
+  for (const [name, price, installments] of [['Trimestral', '370', '3x de R$ 123,33'], ['Semestral', '720', '6x de R$ 120,00'], ['Anual', '1.320', '12x de R$ 110,00']]) {
     const card = page.locator('.plan-card').filter({ hasText: name });
     await expect(card.locator('.plan-price')).toContainText(price);
-    await expect(card.locator('.plan-period')).toHaveText(`/ ${duration} meses`);
-    await expect(card.locator('.plan-equivalence strong')).toHaveText(`R$ ${monthly},00/mês`);
+    await expect(card.locator('.temporary-installments')).toHaveText(installments);
   }
-  await expect(page.locator('.installment')).toContainText('até 12x sem juros');
+  await expect(page.locator('.temporary-monthly .plan-price')).toHaveText('R$ 130,00');
   await expect(page.locator('.schedule-times')).toHaveText(/Segunda a sexta05h ÀS 23hSábado09h ÀS 17hDomingo09h ÀS 13h/);
   await expect(page.locator('address')).toContainText('Rua Padre Lourenço, nº 1292');
   const links = await page.locator('a[href*="wa.me"]').evaluateAll(elements => elements.map(el => (el as HTMLAnchorElement).href));
@@ -45,7 +44,7 @@ test('Dados comerciais e destinos oficiais', async ({ page }) => {
   }
   await expect(page.locator('.contact-details a[href*="instagram"]')).toHaveAttribute('href', 'https://www.instagram.com/academiaespacofitn/');
   await expect(page.locator('.modality-card')).toHaveCount(6);
-  expect(await page.locator('body').innerText()).not.toMatch(/mais vendido|mais escolhido|últimas vagas|plano mensal|99,90|89,90|79,90/i);
+  expect(await page.locator('body').innerText()).not.toMatch(/mais vendido|mais escolhido|últimas vagas|99,90|89,90|79,90/i);
 });
 
 test('Menu mobile: foco, Escape, teclado, navegação e scroll', async ({ page }) => {
