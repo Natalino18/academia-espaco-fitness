@@ -71,3 +71,78 @@
 .location-map-placeholder > span:not(.location-pin) { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); }
 .location-map-placeholder small { font-size: 10px; color: var(--muted); }
 .location-map-placeholder:hover > span:not(.location-pin) { text-decoration: underline; }
+
+/* Rotinas de treino */
+.treinos { background: #0d0e0c; }
+.treinos-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; margin-bottom: 36px; }
+.treinos-heading h2 { font-size: clamp(44px, 4.8vw, 76px); }
+.oms-box { list-style: none; margin: 0; padding: 20px 24px; max-width: 360px; border-left: 3px solid var(--yellow); background: #181a16; display: flex; flex-direction: column; gap: 8px; font-size: 13px; line-height: 1.5; color: #d8d9cf; }
+.oms-box strong { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--yellow); }
+.treinos-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.treinos-tabs button { min-height: 48px; padding: 12px 22px; border: 1px solid #3a3e30; background: transparent; font-family: var(--display); font-size: 20px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; }
+.treinos-tabs button.is-active { background: var(--yellow); border-color: var(--yellow); color: var(--black); }
+.treinos-tabs button:not(.is-active):hover { border-color: var(--yellow); color: var(--yellow); }
+.treinos-painel { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 2fr); gap: 20px; }
+.treinos-resumo { padding: 28px; background: var(--yellow); color: var(--black); display: flex; flex-direction: column; gap: 16px; }
+.treinos-frequencia { font-family: var(--display); font-size: 26px; font-weight: 700; line-height: 1.1; }
+.treinos-resumo > p:not(.treinos-frequencia) { font-size: 14px; line-height: 1.6; }
+.treinos-resumo dl { margin: auto 0 0; display: flex; flex-direction: column; gap: 14px; border-top: 1px solid #14150035; padding-top: 16px; }
+.treinos-resumo dt { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.treinos-resumo dd { margin: 4px 0 0; font-size: 13px; line-height: 1.5; }
+.treinos-dias { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.treinos-dias article { padding: 26px; border: 1px solid #33372b; background: #181a16; }
+.treinos-dias h3 { font-size: 22px; margin-bottom: 16px; color: var(--yellow); }
+.treinos-dias ol { list-style: none; margin: 0; padding: 0; counter-reset: ex; }
+.treinos-dias li { counter-increment: ex; display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.treinos-dias li span::before { content: counter(ex, decimal-leading-zero) '  '; color: var(--muted); font-size: 11px; }
+.treinos-dias li strong { white-space: nowrap; font-weight: 600; }
+.treinos-aviso { margin-top: 24px; padding: 22px 26px; border: 1px solid #ffe00055; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.treinos-aviso p { font-size: 13px; line-height: 1.6; color: #d8d9cf; max-width: 820px; }
+.treinos-aviso strong { color: var(--yellow); }
+.fontes { margin-top: 22px; font-size: 12px; color: var(--muted); }
+.fontes summary { cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; color: var(--yellow); font-weight: 600; }
+.fontes ol { margin: 6px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+.fontes a { text-decoration: underline; text-underline-offset: 3px; }
+.fontes a:hover { color: var(--white); }
+
+/* Alimentação */
+.nutricao { background: #10110f; }
+.nutricao-heading { max-width: 720px; margin-bottom: 40px; }
+.nutricao-heading h2 { font-size: clamp(44px, 4.8vw, 76px); }
+.nutricao-heading > p:not(.eyebrow) { margin-top: 20px; color: #d8d9cf; font-size: 14px; }
+.nutricao-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.nutricao-grid article { position: relative; padding: 28px; border: 1px solid #33372b; background: #181a16; display: flex; flex-direction: column; gap: 12px; }
+.nutricao-num { font-family: var(--display); font-size: 40px; font-weight: 700; color: var(--yellow); line-height: 1; }
+.nutricao-grid h3 { font-size: 24px; }
+.nutricao-grid p { font-size: 14px; line-height: 1.65; color: #d8d9cf; }
+.nutricao-grid small { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+.proteina-calc { margin-top: 24px; padding: 28px 32px; background: var(--yellow); color: var(--black); display: grid; grid-template-columns: 1.4fr .8fr 1fr; gap: 28px; align-items: center; }
+.proteina-calc h3 { font-size: 30px; margin-bottom: 6px; }
+.proteina-calc p { font-size: 13px; line-height: 1.5; }
+.proteina-calc label { display: flex; flex-direction: column; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.proteina-calc input { min-height: 52px; padding: 10px 14px; border: 2px solid var(--black); background: #fffbe0; color: var(--black); font-family: var(--display); font-size: 28px; font-weight: 700; width: 100%; }
+.proteina-calc input:focus-visible { outline: 3px solid var(--black); outline-offset: 2px; }
+.proteina-calc output { display: flex; flex-direction: column; gap: 4px; }
+.proteina-calc output strong { font-family: var(--display); font-size: 44px; line-height: 1; }
+.proteina-calc output span { font-size: 13px; }
+.nutricao-aviso { margin-top: 22px; font-size: 12px; line-height: 1.6; color: var(--muted); max-width: 900px; }
+
+@media (max-width: 1100px) {
+  .treinos-painel { grid-template-columns: 1fr; }
+  .nutricao-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .proteina-calc { grid-template-columns: 1fr 1fr; }
+  .proteina-calc > div:first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+  .treinos-heading { display: block; }
+  .treinos-heading h2, .nutricao-heading h2 { font-size: clamp(44px, 10vw, 60px); }
+  .oms-box { margin-top: 24px; max-width: none; }
+  .treinos-tabs button { flex: 1; padding: 10px 8px; font-size: 16px; }
+  .treinos-resumo, .treinos-dias article { padding: 22px; }
+  .treinos-dias li { font-size: 13px; }
+  .treinos-aviso { flex-direction: column; align-items: flex-start; padding: 20px; }
+  .nutricao-grid { grid-template-columns: 1fr; }
+  .nutricao-grid article { padding: 22px; }
+  .proteina-calc { grid-template-columns: 1fr; padding: 24px 22px; gap: 18px; }
+  .proteina-calc h3 { font-size: 26px; }
+}
