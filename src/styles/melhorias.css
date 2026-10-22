@@ -146,3 +146,24 @@
   .proteina-calc { grid-template-columns: 1fr; padding: 24px 22px; gap: 18px; }
   .proteina-calc h3 { font-size: 26px; }
 }
+
+/* Tour pela academia (imagens reais do vídeo de apresentação) */
+.tour { background: #0d0e0c; padding-top: 0; }
+.tour-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 30px; }
+.tour-heading h2 { font-size: clamp(44px, 4.6vw, 72px); }
+.tour-heading > p { font-size: 12px; color: var(--muted); }
+.tour-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--gutter) 14px; scroll-padding-inline: var(--gutter); scrollbar-width: thin; scrollbar-color: var(--yellow) transparent; }
+.tour-track figure { flex: 0 0 300px; scroll-snap-align: start; position: relative; aspect-ratio: 9 / 16; overflow: hidden; background: #181a16; }
+.tour-track img { transition: transform .6s; }
+.tour-track figure:hover img { transform: scale(1.04); }
+.tour-track figcaption { position: absolute; inset: auto 0 0; padding: 40px 16px 14px; background: linear-gradient(0deg, #000d, transparent); font-size: 12px; font-weight: 600; letter-spacing: .03em; }
+.tour-track:focus-visible { outline-offset: -3px; }
+.tour-credit { margin-top: 10px; font-size: 11px; color: var(--muted); }
+.tour-credit a:hover { color: var(--yellow); }
+@media (max-width: 700px) {
+  .tour-heading { display: block; }
+  .tour-heading h2 { font-size: clamp(44px, 10vw, 58px); }
+  .tour-heading > p { margin-top: 14px; }
+  .tour-track figure { flex-basis: 72vw; }
+}
+@media (prefers-reduced-motion: reduce) { .tour-track figure:hover img { transform: none; } }

@@ -1,5 +1,5 @@
 export const modalities = [
-  { name: 'Musculação', description: 'Força e evolução.', image: 'musculacao', alt: 'Atleta treinando com halteres' },
+  { name: 'Musculação', description: 'Força e evolução.', image: 'musculacao-real', alt: 'Área de peso livre da Academia Espaço Fitness', real: true },
   { name: 'Step', description: 'Energia em movimento.', image: 'step', alt: 'Aluna executando exercício sobre plataforma de Step' },
   { name: 'Jump', description: 'Movimento a cada salto.', image: 'jump', alt: 'Aula de Jump com mulheres saltando em mini trampolins fitness' },
   { name: 'RitBox', description: 'Ritmo em cada movimento.', image: 'ritbox', alt: 'Mulher treinando boxe fitness junto ao saco de pancadas' },
