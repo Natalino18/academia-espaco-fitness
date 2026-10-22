@@ -20,11 +20,11 @@ export function Hero() {
         </div>
         <Photo id={3} className="hero-academy" sizes="(max-width: 700px) 100vw, 50vw" />
       </div>
-      <div className="story-copy" inert><span className="eyebrow">01 / NOSSA ACADEMIA</span><p>TREINAR É<br />UM PASSO.<br /><span>CONTINUAR É<br />O CAMINHO.</span></p><div className="story-details"><span className="story-caption">O próximo passo começa aqui.</span><p>Um espaço preparado para transformar treino em rotina, com estrutura, energia e motivação para você evoluir.</p><Button href="#galeria">Conheça nosso espaço</Button></div></div>
+      <div className="story-copy" inert><span className="eyebrow">01 / NOSSA ACADEMIA</span><p>TREINAR É <br />UM PASSO. <br /><span>CONTINUAR É <br />O CAMINHO.</span></p><div className="story-details"><span className="story-caption">O próximo passo começa aqui.</span><p>Um espaço preparado para transformar treino em rotina, com estrutura, energia e motivação para você evoluir.</p><Button href="#galeria">Conheça nosso espaço</Button></div></div>
       </div>
       <div className="hero-content wrap">
         <p className="eyebrow"><span />{store.name} · {store.city}</p>
-        <h1 id="hero-title">SEU ESPAÇO.<br /><em>SUA EVOLUÇÃO.</em></h1>
+        <h1 id="hero-title">SEU ESPAÇO. <br /><em>SUA EVOLUÇÃO.</em></h1>
         <p className="hero-description">Encontre o seu ritmo. Da musculação às aulas, o próximo passo da sua rotina começa aqui, no BTN 2.</p>
         <div className="button-row"><Button href="#planos">Ver planos</Button><Button variant="outline" href={whatsappUrl()}>Falar no WhatsApp</Button></div>
       </div>

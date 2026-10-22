@@ -17,3 +17,4 @@ export const navigation = [
   { label: 'Contato', href: '#contato' },
 ];
 export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${store.name}, ${store.street}, ${store.neighborhood}, ${store.city}`)}`;
+export const mapsEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(`${store.street}, ${store.neighborhood}, ${store.city}`)}&hl=pt-BR&output=embed`;

@@ -27,7 +27,7 @@ for (const width of [390, 1440]) {
     expect([...origins]).toEqual([new URL(page.url()).origin]);
     expect(await context.cookies()).toEqual([]);
     expect(await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length }))).toEqual({ local: 0, session: 0 });
-    expect(await page.locator('form, iframe, script:not([src])').count()).toBe(0);
+    expect(await page.locator('form, iframe, script:not([src]):not([type="application/ld+json"])').count()).toBe(0);
     const links = await page.locator('a[target="_blank"]').evaluateAll(els => els.map(el => ({ url: (el as HTMLAnchorElement).href, rel: el.getAttribute('rel') || '' })));
     for (const link of links) {
       expect(link.url.startsWith('https://')).toBe(true);

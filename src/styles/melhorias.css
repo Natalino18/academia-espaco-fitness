@@ -1,0 +1,169 @@
+/* Melhorias: poupança nos planos, FAQ, mapa, WhatsApp fixo e secções opcionais (depoimentos, equipe, grade). */
+
+/* Planos — poupança e destaque */
+.plan-savings { padding: 5px 9px; background: var(--yellow); color: var(--black); font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+.plan-savings-note { margin: -10px 0 22px; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.plans--temporary .plan-card--highlight { border-color: var(--yellow); box-shadow: 0 0 0 1px var(--yellow), 0 24px 60px -30px #ffe00055; }
+.plan-card--highlight .temporary-plan-badge { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+@media (max-width: 700px) {
+  /* No telemóvel o plano com melhor preço aparece primeiro */
+  .plans--temporary .plan-card--highlight { order: -1; }
+  .plan-savings-note { margin: -6px 0 16px; font-size: 11px; }
+}
+
+/* Dúvidas frequentes */
+.faq { background: #10110f; }
+.faq-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 90px); align-items: start; }
+.faq-layout h2 { font-size: clamp(44px, 4.6vw, 72px); }
+.faq-layout > div:first-child > p:not(.eyebrow) { color: var(--muted); font-size: 14px; margin: 22px 0 26px; max-width: 320px; }
+.faq-list { border-top: 1px solid var(--line); }
+.faq-list details { border-bottom: 1px solid var(--line); }
+.faq-list summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 0; font-family: var(--display); font-size: clamp(20px, 1.8vw, 26px); font-weight: 600; letter-spacing: -.01em; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary span { color: var(--yellow); font-size: 28px; line-height: 1; transition: transform .25s; }
+.faq-list details[open] summary span { transform: rotate(45deg); }
+.faq-list summary:hover { color: var(--yellow); }
+.faq-list details p { padding: 0 40px 24px 0; color: #d8d9cf; font-size: 14px; }
+@media (max-width: 700px) {
+  .faq-layout { grid-template-columns: 1fr; }
+  .faq-layout h2 { font-size: clamp(44px, 10vw, 60px); }
+  .faq-list summary { font-size: 19px; padding: 18px 0; }
+  .faq-list details p { padding-right: 0; font-size: 13px; }
+}
+
+/* Mapa real no contato */
+.location-map { position: relative; min-height: 335px; border: 1px solid #383c2d; background: #181a15; display: flex; flex-direction: column; }
+.location-map iframe { flex: 1; width: 100%; min-height: 290px; border: 0; filter: grayscale(.35) contrast(1.05); }
+.location-map a { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; font-size: 12px; font-weight: 600; color: var(--yellow); border-top: 1px solid #383c2d; }
+.location-map a .icon { width: 15px; height: 15px; }
+@media (max-width: 700px) { .location-map { min-height: 300px; } .location-map iframe { min-height: 255px; } }
+
+/* WhatsApp fixo */
+.whatsapp-float { position: fixed; right: 18px; bottom: 18px; z-index: 40; width: 58px; height: 58px; display: grid; place-items: center; border-radius: 50%; background: #25d366; color: #fff; box-shadow: 0 10px 30px -8px #000c; opacity: 0; transform: translateY(16px) scale(.9); pointer-events: none; transition: opacity .3s, transform .3s; }
+.whatsapp-float.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.whatsapp-float .icon { width: 28px; height: 28px; }
+.whatsapp-float:focus-visible { outline-color: #fff; }
+@media (min-width: 901px) { .whatsapp-float { right: 26px; bottom: 26px; } }
+@media (max-width: 700px) { .whatsapp-float { width: 52px; height: 52px; right: 14px; bottom: 14px; } .whatsapp-float .icon { width: 25px; height: 25px; } }
+@media print { .whatsapp-float { display: none; } }
+
+/* Secções opcionais — só aparecem quando src/data/social-proof.ts tiver conteúdo */
+.class-schedule, .testimonials, .team { background: #10110f; }
+.class-schedule h2, .testimonials h2, .team h2 { font-size: clamp(44px, 4.6vw, 72px); margin-bottom: 40px; }
+.class-grid, .team-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.class-grid li { padding: 24px; border: 1px solid #33372b; background: #181a16; display: flex; flex-direction: column; gap: 8px; }
+.class-grid strong { font-family: var(--display); font-size: 28px; }
+.class-grid span { font-size: 13px; color: var(--muted); }
+.class-grid .class-times { color: var(--yellow); font-size: 16px; font-weight: 600; }
+.testimonial-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.testimonial-grid blockquote { margin: 0; padding: 28px; border: 1px solid #33372b; border-top: 3px solid var(--yellow); background: #181a16; display: flex; flex-direction: column; justify-content: space-between; gap: 22px; }
+.testimonial-grid blockquote p { font-size: 15px; color: #e6e7dd; }
+.testimonial-grid footer { display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+.testimonial-grid footer span { color: var(--muted); }
+.team-grid li { display: flex; flex-direction: column; gap: 6px; }
+.team-grid img { aspect-ratio: 4 / 5; height: auto; margin-bottom: 10px; }
+.team-grid strong { font-family: var(--display); font-size: 24px; }
+.team-grid span { font-size: 13px; color: var(--yellow); }
+.team-grid small { font-size: 11px; color: var(--muted); }
+.location-map-placeholder { flex: 1; min-height: 290px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 0; background: repeating-linear-gradient(30deg, transparent 0 36px, #ffe0000b 37px 38px, transparent 39px 76px), #181a15; color: var(--white); cursor: pointer; }
+.location-map-placeholder .location-pin { align-self: center; margin-bottom: 14px; }
+.location-map-placeholder strong { font-family: var(--display); font-size: 56px; line-height: 1; }
+.location-map-placeholder > span:not(.location-pin) { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); }
+.location-map-placeholder small { font-size: 10px; color: var(--muted); }
+.location-map-placeholder:hover > span:not(.location-pin) { text-decoration: underline; }
+
+/* Rotinas de treino */
+.treinos { background: #0d0e0c; }
+.treinos-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; margin-bottom: 36px; }
+.treinos-heading h2 { font-size: clamp(44px, 4.8vw, 76px); }
+.oms-box { list-style: none; margin: 0; padding: 20px 24px; max-width: 360px; border-left: 3px solid var(--yellow); background: #181a16; display: flex; flex-direction: column; gap: 8px; font-size: 13px; line-height: 1.5; color: #d8d9cf; }
+.oms-box strong { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--yellow); }
+.treinos-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.treinos-tabs button { min-height: 48px; padding: 12px 22px; border: 1px solid #3a3e30; background: transparent; font-family: var(--display); font-size: 20px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; }
+.treinos-tabs button.is-active { background: var(--yellow); border-color: var(--yellow); color: var(--black); }
+.treinos-tabs button:not(.is-active):hover { border-color: var(--yellow); color: var(--yellow); }
+.treinos-painel { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 2fr); gap: 20px; }
+.treinos-resumo { padding: 28px; background: var(--yellow); color: var(--black); display: flex; flex-direction: column; gap: 16px; }
+.treinos-frequencia { font-family: var(--display); font-size: 26px; font-weight: 700; line-height: 1.1; }
+.treinos-resumo > p:not(.treinos-frequencia) { font-size: 14px; line-height: 1.6; }
+.treinos-resumo dl { margin: auto 0 0; display: flex; flex-direction: column; gap: 14px; border-top: 1px solid #14150035; padding-top: 16px; }
+.treinos-resumo dt { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.treinos-resumo dd { margin: 4px 0 0; font-size: 13px; line-height: 1.5; }
+.treinos-dias { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.treinos-dias article { padding: 26px; border: 1px solid #33372b; background: #181a16; }
+.treinos-dias h3 { font-size: 22px; margin-bottom: 16px; color: var(--yellow); }
+.treinos-dias ol { list-style: none; margin: 0; padding: 0; counter-reset: ex; }
+.treinos-dias li { counter-increment: ex; display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.treinos-dias li span::before { content: counter(ex, decimal-leading-zero) '  '; color: var(--muted); font-size: 11px; }
+.treinos-dias li strong { white-space: nowrap; font-weight: 600; }
+.treinos-aviso { margin-top: 24px; padding: 22px 26px; border: 1px solid #ffe00055; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.treinos-aviso p { font-size: 13px; line-height: 1.6; color: #d8d9cf; max-width: 820px; }
+.treinos-aviso strong { color: var(--yellow); }
+.fontes { margin-top: 22px; font-size: 12px; color: var(--muted); }
+.fontes summary { cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; color: var(--yellow); font-weight: 600; }
+.fontes ol { margin: 6px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+.fontes a { text-decoration: underline; text-underline-offset: 3px; }
+.fontes a:hover { color: var(--white); }
+
+/* Alimentação */
+.nutricao { background: #10110f; }
+.nutricao-heading { max-width: 720px; margin-bottom: 40px; }
+.nutricao-heading h2 { font-size: clamp(44px, 4.8vw, 76px); }
+.nutricao-heading > p:not(.eyebrow) { margin-top: 20px; color: #d8d9cf; font-size: 14px; }
+.nutricao-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.nutricao-grid article { position: relative; padding: 28px; border: 1px solid #33372b; background: #181a16; display: flex; flex-direction: column; gap: 12px; }
+.nutricao-num { font-family: var(--display); font-size: 40px; font-weight: 700; color: var(--yellow); line-height: 1; }
+.nutricao-grid h3 { font-size: 24px; }
+.nutricao-grid p { font-size: 14px; line-height: 1.65; color: #d8d9cf; }
+.nutricao-grid small { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+.proteina-calc { margin-top: 24px; padding: 28px 32px; background: var(--yellow); color: var(--black); display: grid; grid-template-columns: 1.4fr .8fr 1fr; gap: 28px; align-items: center; }
+.proteina-calc h3 { font-size: 30px; margin-bottom: 6px; }
+.proteina-calc p { font-size: 13px; line-height: 1.5; }
+.proteina-calc label { display: flex; flex-direction: column; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.proteina-calc input { min-height: 52px; padding: 10px 14px; border: 2px solid var(--black); background: #fffbe0; color: var(--black); font-family: var(--display); font-size: 28px; font-weight: 700; width: 100%; }
+.proteina-calc input:focus-visible { outline: 3px solid var(--black); outline-offset: 2px; }
+.proteina-calc output { display: flex; flex-direction: column; gap: 4px; }
+.proteina-calc output strong { font-family: var(--display); font-size: 44px; line-height: 1; }
+.proteina-calc output span { font-size: 13px; }
+.nutricao-aviso { margin-top: 22px; font-size: 12px; line-height: 1.6; color: var(--muted); max-width: 900px; }
+
+@media (max-width: 1100px) {
+  .treinos-painel { grid-template-columns: 1fr; }
+  .nutricao-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .proteina-calc { grid-template-columns: 1fr 1fr; }
+  .proteina-calc > div:first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+  .treinos-heading { display: block; }
+  .treinos-heading h2, .nutricao-heading h2 { font-size: clamp(44px, 10vw, 60px); }
+  .oms-box { margin-top: 24px; max-width: none; }
+  .treinos-tabs button { flex: 1; padding: 10px 8px; font-size: 16px; }
+  .treinos-resumo, .treinos-dias article { padding: 22px; }
+  .treinos-dias li { font-size: 13px; }
+  .treinos-aviso { flex-direction: column; align-items: flex-start; padding: 20px; }
+  .nutricao-grid { grid-template-columns: 1fr; }
+  .nutricao-grid article { padding: 22px; }
+  .proteina-calc { grid-template-columns: 1fr; padding: 24px 22px; gap: 18px; }
+  .proteina-calc h3 { font-size: 26px; }
+}
+
+/* Tour pela academia (imagens reais do vídeo de apresentação) */
+.tour { background: #0d0e0c; padding-top: 0; }
+.tour-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 30px; }
+.tour-heading h2 { font-size: clamp(44px, 4.6vw, 72px); }
+.tour-heading > p { font-size: 12px; color: var(--muted); }
+.tour-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--gutter) 14px; scroll-padding-inline: var(--gutter); scrollbar-width: thin; scrollbar-color: var(--yellow) transparent; }
+.tour-track figure { flex: 0 0 300px; scroll-snap-align: start; position: relative; aspect-ratio: 9 / 16; overflow: hidden; background: #181a16; }
+.tour-track img { transition: transform .6s; }
+.tour-track figure:hover img { transform: scale(1.04); }
+.tour-track figcaption { position: absolute; inset: auto 0 0; padding: 40px 16px 14px; background: linear-gradient(0deg, #000d, transparent); font-size: 12px; font-weight: 600; letter-spacing: .03em; }
+.tour-track:focus-visible { outline-offset: -3px; }
+.tour-credit { margin-top: 10px; font-size: 11px; color: var(--muted); }
+.tour-credit a:hover { color: var(--yellow); }
+@media (max-width: 700px) {
+  .tour-heading { display: block; }
+  .tour-heading h2 { font-size: clamp(44px, 10vw, 58px); }
+  .tour-heading > p { margin-top: 14px; }
+  .tour-track figure { flex-basis: 72vw; }
+}
+@media (prefers-reduced-motion: reduce) { .tour-track figure:hover img { transform: none; } }
