@@ -9,7 +9,7 @@ for (const width of widths) {
     await page.setViewportSize({ width, height: width < 700 ? 844 : 1000 });
     await page.goto('/');
     await page.evaluate(() => document.fonts.ready);
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('SEU ESPAÇO.SUA EVOLUÇÃO.');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('SEU ESPAÇO. SUA EVOLUÇÃO.');
     for (const id of ['inicio', 'espaco', 'modalidades', 'galeria', 'horarios', 'planos', 'contato']) {
       await page.locator(`#${id}`).scrollIntoViewIfNeeded();
       await page.waitForTimeout(100);

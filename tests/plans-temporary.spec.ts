@@ -8,7 +8,7 @@ for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
     await page.evaluate(() => document.fonts.ready);
     const section = page.locator('#planos');
     await section.scrollIntoViewIfNeeded();
-    await expect(section.getByRole('heading', { level: 2 })).toHaveText('ESCOLHA O PLANOIDEAL PARA VOCÊ.');
+    await expect(section.getByRole('heading', { level: 2 })).toHaveText('ESCOLHA O PLANO IDEAL PARA VOCÊ.');
     const cards = section.locator('.plan-card');
     await expect(cards).toHaveCount(3);
     for (const [i, price, installments] of [[0, 'R$ 370,00', '3x de R$ 123,33'], [1, 'R$ 720,00', '6x de R$ 120,00'], [2, 'R$ 1.320,00', '12x de R$ 110,00']] as const) {

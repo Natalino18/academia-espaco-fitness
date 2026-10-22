@@ -7,8 +7,8 @@ export function Benefits() {
     <div className="benefits-backdrop" aria-hidden="true"><Photo id={4} decorative sizes="(max-width: 700px) 100vw, 65vw" /></div>
     <div className="wrap benefits-content">
       <div className="benefits-heading">
-        <p className="eyebrow" data-reveal>BENEFÍCIOS E CONVÊNIOS</p>
-        <h2 id="benefits-title" data-reveal>Seu benefício também<br /><em>treina com você</em></h2>
+        <p className="eyebrow" data-reveal>05 / Benefícios e convênios</p>
+        <h2 id="benefits-title" data-reveal>Seu benefício também <br /><em>treina com você</em></h2>
         <p className="benefits-description" data-reveal>A Espaço Fitness também recebe alunos através de benefícios corporativos parceiros. Consulte a elegibilidade do seu plano e venha treinar com a gente.</p>
       </div>
       <div className="benefits-grid">
@@ -22,10 +22,10 @@ export function Benefits() {
         </article>)}
       </div>
       <ul className="benefits-strip" aria-label="Vantagens dos benefícios corporativos" data-reveal>
-        <li><BenefitIcon type="training" /><span>MAIS OPÇÕES<br />PARA VOCÊ TREINAR</span></li>
-        <li><BenefitIcon type="people" /><span>BENEFÍCIOS<br />CORPORATIVOS</span></li>
-        <li><BenefitIcon type="app" /><span>PRATICIDADE<br />PELO APLICATIVO</span></li>
-        <li><BenefitIcon type="quality" /><span>QUALIDADE<br />ESPAÇO FITNESS</span></li>
+        <li><BenefitIcon type="training" /><span>MAIS OPÇÕES <br />PARA VOCÊ TREINAR</span></li>
+        <li><BenefitIcon type="people" /><span>BENEFÍCIOS <br />CORPORATIVOS</span></li>
+        <li><BenefitIcon type="app" /><span>PRATICIDADE <br />PELO APLICATIVO</span></li>
+        <li><BenefitIcon type="quality" /><span>QUALIDADE <br />ESPAÇO FITNESS</span></li>
       </ul>
       <p className="benefits-location" data-reveal>Benefícios corporativos na Academia Espaço Fitness, em Paulo Afonso.</p>
     </div>

@@ -19,7 +19,7 @@ export function Modalities() {
   }
   return <section id="modalidades" className="modalities section" tabIndex={-1} aria-labelledby="modalities-title">
     <div className="wrap modalities-layout">
-      <div className="modalities-intro" data-reveal><p className="eyebrow">02 / Modalidades</p><h2 id="modalities-title">DIFERENTES<br />RITMOS.<br /><em>O MESMO<br />OBJETIVO.</em></h2><p>Encontre o movimento que combina com você. Escolha seu ritmo e faça parte.</p><a className="text-link" href={whatsappUrl('as modalidades')} target="_blank" rel="noopener noreferrer">Conheça as modalidades <Icon /></a>
+      <div className="modalities-intro" data-reveal><p className="eyebrow">02 / Modalidades</p><h2 id="modalities-title">DIFERENTES <br />RITMOS. <br /><em>O MESMO <br />OBJETIVO.</em></h2><p>Encontre o movimento que combina com você. Escolha seu ritmo e faça parte.</p><a className="text-link" href={whatsappUrl('os horários das aulas')} target="_blank" rel="noopener noreferrer">Consultar horários das aulas <Icon /></a>
         <div className="carousel-controls"><button aria-label="Modalidades anteriores" onClick={() => move(-1)} disabled={position.start}><span>←</span></button><button aria-label="Próximas modalidades" onClick={() => move(1)} disabled={position.end}><span>→</span></button><span>06 MODALIDADES</span></div>
       </div>
       <div className="modalities-gallery"><div ref={track} className="modality-track" role="region" aria-label="Seis modalidades da academia" tabIndex={0} onKeyDown={event => {
